@@ -1,4 +1,4 @@
-﻿namespace Tiendaapi.Controllers.Modelo
+﻿namespace Tiendaapi.Modelo
 {
     public class ProductosModel
     {
