@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Tiendaapi.Controllers.Modelo;
+using Tiendaapi.Datos;
+using Tiendaapi.Modelo;
 
 namespace Tiendaapi.Controllers
 {
@@ -10,11 +11,13 @@ namespace Tiendaapi.Controllers
         [HttpGet]
         public async Task <ActionResult<List<ProductosModel>>> Get()
         {
-
+            var funcion = new DatosProductos();
+            var lista = await funcion.mostrarProductos();
+            return lista;
         }
-        public async ProdcutosModel GetProdcutos()
+       /* public async ProdcutosModel GetProdcutos()
         {
 
-        }
+        }*/
     }
 }
