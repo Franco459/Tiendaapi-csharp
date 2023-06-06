@@ -1,4 +1,5 @@
-﻿using System.Data;
+﻿using Microsoft.SqlServer.Server;
+using System.Data;
 using System.Data.SqlClient;
 using System.Data.SqlTypes;
 using Tiendaapi.Conexion;
@@ -32,6 +33,22 @@ namespace Tiendaapi.Datos
                 }
             }
             return lista;
+        }
+
+        public async Task crearProducto(ProductosModel producto)
+        {
+            using (var sql = new SqlConnection(con.conexionSQL()))
+            {
+                using (var cmd = new SqlCommand("insertarProductos", sql))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@descripcion", producto.descripcion);//los parametros se añaden de uno en uno
+                    cmd.Parameters.AddWithValue("precio", producto.precio);
+
+                    await sql.OpenAsync();
+                    await cmd.ExecuteNonQueryAsync();
+                }
+            }
         }
     }
 }

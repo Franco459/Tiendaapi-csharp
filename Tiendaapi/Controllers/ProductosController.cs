@@ -15,9 +15,14 @@ namespace Tiendaapi.Controllers
             var lista = await funcion.mostrarProductos();
             return lista;
         }
-       /* public async ProdcutosModel GetProdcutos()
-        {
 
-        }*/
+        [HttpPost]
+        public async Task Post([FromBody] ProductosModel producto)
+        {
+            var funcion = new DatosProductos();
+            //var descripcion = producto.descripcion;
+            //var precio = producto.precio;
+            await funcion.crearProducto(producto);
+        }
     }
 }
