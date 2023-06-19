@@ -50,5 +50,23 @@ namespace Tiendaapi.Datos
                 }
             }
         }
+
+        public async Task modificarProducto(ProductosModel producto)
+        {
+
+            using (var sql = new SqlConnection(con.conexionSQL()))
+            {
+                using (var cmd = new SqlCommand("actualizarProducto", sql))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("id", producto.id);
+                    cmd.Parameters.AddWithValue("@descripcion", producto.descripcion);//los parametros se añaden de uno en uno
+                    cmd.Parameters.AddWithValue("precio", producto.precio);
+
+                    await sql.OpenAsync();
+                    await cmd.ExecuteNonQueryAsync();
+                }
+            }
+        }
     }
 }

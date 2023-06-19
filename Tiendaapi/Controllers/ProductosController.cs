@@ -6,7 +6,7 @@ namespace Tiendaapi.Controllers
 {
     [ApiController]
     [Route("api/productos")]
-    public class ProductosController
+    public class ProductosController:ControllerBase
     {
         [HttpGet]
         public async Task <ActionResult<List<ProductosModel>>> Get()
@@ -23,6 +23,15 @@ namespace Tiendaapi.Controllers
             //var descripcion = producto.descripcion;
             //var precio = producto.precio;
             await funcion.crearProducto(producto);
+        }
+
+        [HttpPut("{id}")]
+        public async Task <ActionResult> Put([FromBody] ProductosModel producto, int id)
+        {
+            var funcion = new DatosProductos();
+            producto.id = id;
+            await funcion.modificarProducto(producto);
+            return NoContent();
         }
     }
 }
