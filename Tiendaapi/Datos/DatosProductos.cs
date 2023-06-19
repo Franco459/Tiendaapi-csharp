@@ -68,5 +68,19 @@ namespace Tiendaapi.Datos
                 }
             }
         }
+
+        public async Task eliminarProductoPorId(int id)
+        {
+            using(var sql = new SqlConnection(con.conexionSQL()))
+            {
+                using(var cmd = new SqlCommand("eliminarProductos", sql))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("id", id);
+                    await sql.OpenAsync();
+                    await cmd.ExecuteNonQueryAsync();
+                }
+            }
+        }
     }
 }

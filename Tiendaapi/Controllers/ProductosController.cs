@@ -33,5 +33,13 @@ namespace Tiendaapi.Controllers
             await funcion.modificarProducto(producto);
             return NoContent();
         }
+
+        [HttpDelete("{id}")]
+        public async Task <ActionResult> Delete(int id)
+        {
+            var funcion = new DatosProductos();
+            await funcion.eliminarProductoPorId(id);
+            return NoContent();
+        }
     }
 }
